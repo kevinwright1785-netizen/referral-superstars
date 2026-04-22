@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Referral Superstars — Partner Intake</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       REFERRAL SUPERSTARS INTAKE FORM
+       Premium fintech aesthetic — dense, data-forward, sharp
+       ============================================================ */
+
+    :root {
+      --font-sans: "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+      --font-serif: "Instrument Serif", "Times New Roman", serif;
+      --r-xs: 2px; --r-sm: 4px; --r-md: 6px; --r-lg: 8px;
+      --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 20px;
+      --s-6: 24px; --s-8: 32px; --s-10: 40px; --s-12: 48px; --s-16: 64px;
+      --ease: cubic-bezier(0.2,0,0,1);
+      --dur-fast: 120ms; --dur: 200ms; --dur-slow: 400ms;
+    }
+
+    [data-theme="light"] {
+      --bg: #FAFAF7; --bg-elev: #FFFFFF; --bg-sunken: #F4F3EE; --bg-input: #FFFFFF; --bg-hover: #F0EFEA;
+      --ink: #0A0A0A; --ink-2: #2A2A28; --ink-3: #6B6B66; --ink-4: #9A9A93; --ink-5: #C9C8C0;
+      --line: #E6E5DE; --line-2: #D8D7CF; --line-strong: #0A0A0A;
+      --success: #0F766E; --warn: #B45309; --error: #B91C1C;
+      --shadow-sm: 0 1px 0 rgba(10,10,10,0.04);
+      --shadow-md: 0 1px 2px rgba(10,10,10,0.06), 0 4px 12px rgba(10,10,10,0.04);
+      --shadow-focus: 0 0 0 3px var(--accent-tint);
+    }
+
+    [data-accent="indigo"] {
+      --accent: #2D7D5A; --accent-hover: #236648; --accent-ink: #FFFFFF;
+      --accent-tint: rgba(45,125,90,0.18); --accent-soft: rgba(45,125,90,0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      font-feature-settings: "ss01","ss02","cv11";
+      background: var(--bg); color: var(--ink);
+      font-size: 14px; line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* Top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: var(--s-4) var(--s-8);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--s-6);
+    }
+    .brand { display: flex; align-items: center; gap: var(--s-3); font-weight: 600; letter-spacing: -0.01em; }
+    .brand-sep { color: var(--ink-4); font-weight: 400; font-size: 14px; }
+    .brand-logo { height: 26px; width: auto; display: block; border-radius: 4px; }
+    .brand-name { font-size: 14px; letter-spacing: -0.01em; }
+    .topbar-meta {
+      display: flex; align-items: center; gap: var(--s-6);
+      font-family: var(--font-mono); font-size: 11px; color: var(--ink-3);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .topbar-meta .dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--success); margin-right: var(--s-2);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 20%, transparent);
+    }
+
+    /* Progress */
+    .progress-wrap { max-width: 1100px; margin: 0 auto; padding: 0 var(--s-8); }
+    .progress { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-3) 0; }
+    .progress-track { flex: 1; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent); transition: width var(--dur-slow) var(--ease); border-radius: 2px; }
+    .progress-pct { font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); font-variant-numeric: tabular-nums; min-width: 42px; text-align: right; }
+    .progress-step-label { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* App layout */
+    .app { max-width: 1100px; margin: 0 auto; padding: 0 var(--s-8); }
+
+    /* Hero */
+    .hero {
+      padding: var(--s-16) 0 var(--s-10);
+      display: grid; grid-template-columns: 1fr auto; align-items: end; gap: var(--s-8);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-kicker { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: var(--s-4); }
+    .hero h1 { font-size: 52px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.02; margin: 0 0 var(--s-4); }
+    .hero h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent); }
+    .hero-sub { color: var(--ink-3); max-width: 52ch; font-size: 15px; line-height: 1.5; }
+    .hero-meta { display: flex; flex-direction: column; gap: var(--s-2); align-items: flex-end; font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; min-width: 200px; }
+    .hero-meta-row { display: flex; justify-content: space-between; width: 100%; gap: var(--s-4); padding: var(--s-2) 0; border-bottom: 1px dashed var(--line); }
+    .hero-meta-row:last-child { border-bottom: none; }
+    .hero-meta-row b { color: var(--ink); font-weight: 500; }
+
+    /* Form wrap */
+    .form-wrap { padding: var(--s-10) 0 var(--s-16); }
+
+    /* Section */
+    .section {
+      padding: var(--s-10) 0; border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 240px 1fr; gap: var(--s-10);
+    }
+    .section:last-of-type { border-bottom: none; }
+    .section-header { position: sticky; top: 72px; align-self: start; }
+    .section-num { font-family: var(--font-mono); font-size: 11px; color: var(--ink-4); letter-spacing: 0.08em; margin-bottom: var(--s-2); }
+    .section-title { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 var(--s-3); color: var(--ink); line-height: 1.15; }
+    .section-desc { font-size: 13px; color: var(--ink-3); line-height: 1.5; max-width: 28ch; }
+    .section-body { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--s-5) var(--s-5); align-content: start; }
+
+    /* Field span helpers */
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+
+    /* Field */
+    .field { display: flex; flex-direction: column; gap: var(--s-2); position: relative; }
+    .field-label { font-size: 12px; font-weight: 500; color: var(--ink-2); letter-spacing: -0.005em; display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); }
+    .field-label .req { color: var(--error); font-family: var(--font-mono); font-size: 10px; font-weight: 400; }
+    .input {
+      width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
+      background: var(--bg-input); border: 1px solid var(--line-2); border-radius: var(--r-sm);
+      padding: 10px 12px; outline: none; line-height: 1.3;
+      transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .input::placeholder { color: var(--ink-4); }
+    .input:hover { border-color: var(--ink-4); }
+    .input:focus { border-color: var(--accent); box-shadow: var(--shadow-focus); }
+    .input.mono { font-family: var(--font-mono); font-size: 13px; letter-spacing: -0.01em; }
+    .input-prefix { position: relative; display: flex; align-items: center; }
+    .input-prefix .prefix { position: absolute; left: 12px; font-family: var(--font-mono); font-size: 13px; color: var(--ink-4); pointer-events: none; }
+    .input-prefix .input { padding-left: 26px; }
+    .field.error .input { border-color: var(--error); }
+    .field.error .input:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--error) 20%, transparent); }
+    .field.valid .input { border-color: color-mix(in srgb, var(--success) 50%, var(--line-2)); }
+    .field-msg { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.01em; display: flex; align-items: center; gap: var(--s-2); min-height: 14px; }
+    .field-msg.error { color: var(--error); }
+
+    /* Pills */
+    .pill-group { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+    .pill {
+      font-family: inherit; font-size: 13px; font-weight: 500; letter-spacing: -0.005em;
+      padding: 8px 14px; border-radius: var(--r-sm); border: 1px solid var(--line-2);
+      background: var(--bg-input); color: var(--ink-2); cursor: pointer;
+      transition: all var(--dur-fast) var(--ease); line-height: 1.2;
+    }
+    .pill:hover { border-color: var(--ink-4); color: var(--ink); }
+    .pill.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .pill-sub { border-left: 2px solid var(--accent); padding-left: var(--s-4); animation: slideIn var(--dur) var(--ease); }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } }
+
+    /* Checkboxes */
+    .check-group { display: flex; flex-direction: column; gap: var(--s-2); }
+    .check {
+      display: flex; align-items: flex-start; gap: var(--s-3); cursor: pointer;
+      padding: var(--s-3); border: 1px solid var(--line); border-radius: var(--r-sm);
+      background: var(--bg-elev); transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+      user-select: none;
+    }
+    .check:hover { border-color: var(--ink-4); }
+    .check.on { border-color: var(--accent); background: var(--accent-soft); }
+    .check-box {
+      width: 16px; height: 16px; border-radius: var(--r-xs); border: 1px solid var(--line-2);
+      background: var(--bg-input); flex-shrink: 0; margin-top: 1px;
+      display: grid; place-items: center; transition: all var(--dur) var(--ease);
+    }
+    .check:hover .check-box { border-color: var(--ink-3); }
+    .check.on .check-box { background: var(--accent); border-color: var(--accent); }
+    .check-box svg { width: 10px; height: 10px; stroke: var(--accent-ink); opacity: 0; transform: scale(0.5); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+    .check.on .check-box svg { opacity: 1; transform: scale(1); }
+    .check-label { font-size: 13px; color: var(--ink); font-weight: 500; letter-spacing: -0.005em; }
+    .check-sub { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      font-family: inherit; font-size: 13px; font-weight: 500; letter-spacing: -0.005em;
+      padding: 10px 16px; border-radius: var(--r-sm); border: 1px solid transparent;
+      cursor: pointer; transition: all var(--dur-fast) var(--ease); line-height: 1.2;
+    }
+    .btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+    .btn-primary:active { transform: translateY(1px); }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+    .btn-ghost { background: transparent; color: var(--ink-2); border-color: var(--line-2); }
+    .btn-ghost:hover { background: var(--bg-hover); color: var(--ink); border-color: var(--ink-4); }
+    .btn .kbd { font-family: var(--font-mono); font-size: 10px; padding: 2px 5px; border-radius: 3px; background: color-mix(in srgb, currentColor 15%, transparent); opacity: 0.7; margin-left: var(--s-1); }
+
+    /* Form footer */
+    .form-foot { display: flex; align-items: center; justify-content: flex-end; padding: var(--s-8) 0 var(--s-4); gap: var(--s-4); border-top: 1px solid var(--line); margin-top: var(--s-8); }
+
+    /* Review */
+    .review { padding: var(--s-10) 0; }
+    .review-header { display: flex; justify-content: space-between; align-items: end; border-bottom: 1px solid var(--line); padding-bottom: var(--s-6); margin-bottom: var(--s-8); }
+    .review h2 { font-size: 32px; font-weight: 500; letter-spacing: -0.02em; margin: 0; }
+    .review h2 em { font-family: var(--font-serif); font-style: italic; color: var(--accent); font-weight: 400; }
+    .review-section { display: grid; grid-template-columns: 240px 1fr; gap: var(--s-10); padding: var(--s-6) 0; border-bottom: 1px solid var(--line); }
+    .review-section:last-of-type { border: none; }
+    .review-section-title { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center; gap: var(--s-2); }
+    .review-section-title .edit { color: var(--accent); cursor: pointer; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent); text-underline-offset: 2px; }
+    .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3) var(--s-8); }
+    .review-row { display: grid; grid-template-columns: 1fr auto; gap: var(--s-4); padding: var(--s-2) 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
+    .review-row .k { color: var(--ink-3); }
+    .review-row .v { color: var(--ink); font-weight: 500; text-align: right; }
+    .review-row .v.empty { color: var(--ink-4); font-weight: 400; font-style: italic; }
+    .review-row .v.mono { font-family: var(--font-mono); font-size: 12px; }
+    .review-chips { display: flex; gap: var(--s-2); flex-wrap: wrap; grid-column: 1 / -1; }
+    .chip { font-family: var(--font-mono); font-size: 11px; padding: 4px 8px; border-radius: var(--r-xs); background: var(--accent-soft); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); text-transform: uppercase; letter-spacing: 0.04em; }
+    .review-foot { padding: var(--s-8) 0; display: flex; flex-direction: column; gap: var(--s-5); border-top: 1px solid var(--line); margin-top: var(--s-4); }
+    .review-actions { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); }
+
+    /* Error banner */
+    .error-banner {
+      background: color-mix(in srgb, var(--error) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--error) 30%, transparent);
+      border-radius: var(--r-sm); padding: var(--s-4) var(--s-5);
+      font-size: 13px; color: var(--error); margin-bottom: var(--s-5);
+    }
+
+    /* Success */
+    .success { padding: var(--s-16) 0; text-align: center; max-width: 520px; margin: 0 auto; }
+    .success-mark { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; margin: 0 auto var(--s-6); animation: pop var(--dur-slow) var(--ease); }
+    @keyframes pop { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    .success h2 { font-size: 36px; font-weight: 500; letter-spacing: -0.025em; margin: 0 0 var(--s-3); }
+    .success h2 em { font-family: var(--font-serif); font-style: italic; color: var(--accent); font-weight: 400; }
+    .success p { color: var(--ink-3); font-size: 15px; margin: 0 0 var(--s-6); }
+    .success-ref { display: inline-flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--bg-elev); font-family: var(--font-mono); font-size: 12px; }
+    .success-ref .k { color: var(--ink-4); text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .section, .review-section { grid-template-columns: 1fr; gap: var(--s-5); }
+      .section-header { position: static; }
+      .section-body { grid-template-columns: repeat(2, 1fr); }
+      .span-2, .span-3, .span-4, .span-6 { grid-column: span 2; }
+      .hero { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 36px; }
+      .review-grid { grid-template-columns: 1fr; }
+    }
+  
+    /* ============================================================
+       TAB NAVIGATION
+       ============================================================ */
+    .tab-nav {
+      position: sticky; top: 57px; z-index: 40;
+      background: var(--bg-elev);
+      border-bottom: 1px solid var(--line);
+    }
+    .tab-nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 var(--s-8);
+      display: flex; gap: 0;
+    }
+    .tab-btn {
+      font-family: var(--font-sans); font-size: 13px; font-weight: 500;
+      color: var(--ink-3); background: transparent; border: none;
+      padding: var(--s-4) var(--s-5);
+      cursor: pointer; border-bottom: 2px solid transparent;
+      transition: all var(--dur) var(--ease);
+      letter-spacing: -0.005em;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active { color: var(--ink); border-bottom-color: var(--accent); }
+
+    /* ============================================================
+       PROGRAM GUIDE TAB
+       ============================================================ */
+    .guide { padding: var(--s-10) 0 var(--s-16); }
+
+    .guide-section { margin-bottom: var(--s-12); }
+
+    .guide-section-title {
+      font-family: var(--font-mono); font-size: 11px; color: var(--ink-3);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding-bottom: var(--s-3); border-bottom: 1px solid var(--line);
+      margin-bottom: var(--s-6);
+    }
+
+    /* ICP */
+    .icp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+
+    .icp-card {
+      border: 1px solid var(--line); border-radius: var(--r-md);
+      overflow: hidden;
+    }
+
+    .icp-card-header {
+      background: #F37021; padding: var(--s-3) var(--s-5);
+      font-size: 13px; font-weight: 600; color: #fff; letter-spacing: -0.005em;
+    }
+
+    .icp-card-body { background: var(--bg-elev); }
+
+    .icp-row {
+      padding: var(--s-4) var(--s-5);
+      border-bottom: 1px solid var(--line);
+      font-size: 13px; color: var(--ink-2); line-height: 1.5;
+    }
+    .icp-row:last-child { border-bottom: none; }
+    .icp-row strong { color: var(--ink); font-weight: 600; }
+
+    /* Payout tables */
+    .payout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+
+    .payout-card {
+      border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden;
+    }
+
+    .payout-table { width: 100%; border-collapse: collapse; }
+
+    .payout-table thead tr:first-child td {
+      background: #0E2240; color: #fff; padding: var(--s-3) var(--s-4);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .payout-table thead tr:last-child td {
+      background: #1a3a5c; color: rgba(255,255,255,0.8);
+      padding: var(--s-2) var(--s-4); font-size: 11px; font-weight: 500;
+    }
+
+    .payout-table tbody tr:nth-child(even) { background: var(--bg-sunken); }
+    .payout-table tbody tr:nth-child(odd) { background: var(--bg-elev); }
+
+    .payout-table tbody td {
+      padding: var(--s-3) var(--s-4); font-size: 13px; color: var(--ink-2);
+      border-bottom: 1px solid var(--line);
+    }
+    .payout-table tbody tr:last-child td { border-bottom: none; }
+    .payout-table tbody td:last-child { font-weight: 600; color: var(--ink); }
+
+    .payout-warning {
+      margin-top: var(--s-4); padding: var(--s-3) var(--s-4);
+      background: var(--bg-sunken); border: 1px solid var(--line);
+      border-radius: var(--r-sm); font-size: 12px; color: var(--ink-3);
+      font-family: var(--font-mono); letter-spacing: 0.01em;
+    }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: var(--s-1); }
+
+    .faq-item {
+      border: 1px solid var(--line); border-radius: var(--r-sm);
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%; text-align: left; background: var(--bg-elev);
+      border: none; padding: var(--s-4) var(--s-5);
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; font-family: var(--font-sans); font-size: 13px;
+      font-weight: 600; color: var(--ink); letter-spacing: -0.005em;
+      transition: background var(--dur) var(--ease);
+    }
+    .faq-q:hover { background: var(--bg-hover); }
+    .faq-q.open { background: var(--accent-soft); color: var(--accent); }
+
+    .faq-chevron {
+      font-size: 10px; color: var(--ink-4); transition: transform var(--dur) var(--ease);
+      flex-shrink: 0; margin-left: var(--s-4);
+    }
+    .faq-q.open .faq-chevron { transform: rotate(180deg); color: var(--accent); }
+
+    .faq-a {
+      padding: 0 var(--s-5); max-height: 0; overflow: hidden;
+      transition: max-height var(--dur-slow) var(--ease), padding var(--dur) var(--ease);
+      font-size: 13px; color: var(--ink-3); line-height: 1.6;
+      background: var(--bg-elev);
+    }
+    .faq-a.open { max-height: 200px; padding: var(--s-4) var(--s-5); }
+    .faq-a a { color: var(--accent); }
+
+    .guide-contact {
+      margin-top: var(--s-8); padding: var(--s-5);
+      border: 1px solid var(--line); border-radius: var(--r-sm);
+      background: var(--bg-elev); font-size: 13px; color: var(--ink-3);
+      font-style: italic;
+    }
+    .guide-contact a { color: var(--accent); font-style: normal; font-weight: 500; }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor-blink {
+      display: inline-block;
+      width: 2px;
+      height: 0.8em;
+      background: var(--ink-3);
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: cursorBlink 700ms step-end infinite;
+    }
+
+    /* ============================================================
+       TAB TRANSITION
+       ============================================================ */
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .tab-content {
+      animation: tabFadeIn 400ms cubic-bezier(0.2,0,0,1) both;
+    }
+    /* ============================================================
+       INPUT MICRO-ANIMATION
+       ============================================================ */
+    .input {
+      transition: border-color var(--dur) var(--ease), 
+                  box-shadow var(--dur) var(--ease),
+                  transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .input:focus {
+      transform: translateY(-3px) scale(1.005);
+      box-shadow: var(--shadow-focus), 0 8px 20px rgba(45,125,90,0.12);
+    }
+</style>
+</head>
+<body data-theme="light" data-accent="indigo">
+
+<div id="root"></div>
+
+<!-- React + Babel -->
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+// ============================================================
+// CONFIGURATION — paste your Apps Script deployment URL here
+// ============================================================
+const POWER_AUTOMATE_URL = "https://defaultc27d2d14550e437f87c84fcb32213a.0a.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/680b14e5ad104d14acf43e672388dbdb/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=BpjsChZ58yGcQYiFkuOmK2g6uMnIfPksNt2GjTwYmQo";
+
+const { useState, useEffect, useMemo } = React;
+
+// ============================================================
+// FORM DATA DEFINITION
+// ============================================================
+const SECTIONS = [
+  {
+    id: "submitter",
+    num: "01",
+    title: "Submitted By",
+    desc: "Who is filing this referral? Confirmation will be sent to this email.",
+    fields: [
+      { key: "submitter_name",  label: "Your full name",       placeholder: "John Smith",            span: 3, required: true },
+      { key: "submitter_title", label: "Your title / dept",    placeholder: "Title / Department",      span: 3 },
+      { key: "submitter_email", label: "Your eCapital email",  placeholder: "John.Smith@ecapital.com",    span: 3, required: true },
+    ],
+  },
+  {
+    id: "client",
+    num: "02",
+    title: "Prospect Profile",
+    desc: "Legal and contact information for the prospect.",
+    fields: [
+      { key: "legal_name",    label: "Legal business name",    placeholder: "Northstar Logistics, LLC", span: 4, required: true },
+      { key: "dba",           label: "DBA (if any)",           placeholder: "Northstar",                span: 2 },
+      { key: "client_name",   label: "Primary contact name",   placeholder: "Jane Smith",               span: 3, required: true },
+      { key: "client_email",  label: "Primary contact email",  placeholder: "info@northstar.co",        span: 3 },
+      { key: "client_phone",  label: "Primary phone",          placeholder: "555-555-5555",             span: 3, type: "phone" },
+      { key: "street",        label: "Street address",         placeholder: "1200 Harrison St",         span: 4 },
+      { key: "unit",          label: "Suite / Unit",           placeholder: "Suite 400",                span: 2 },
+      { key: "city",          label: "City",                   placeholder: "San Francisco",            span: 2 },
+      { key: "state",         label: "State",                  placeholder: "CA",                       span: 2 },
+      { key: "zip",           label: "ZIP",                    placeholder: "94103",                    span: 2, mono: true },
+    ],
+    checks: {
+      label: "Current financing",
+      items: [
+        { key: "has_bank_line",  label: "Existing bank line of credit" },
+        { key: "has_factor",     label: "Currently factoring with another provider" },
+        { key: "has_mca",        label: "Active merchant cash advance" },
+        { key: "has_equipment",  label: "Equipment financing" },
+        { key: "has_none",       label: "None of the above" },
+        { key: "has_other",      label: "Other", withInput: true, inputKey: "has_other_text", inputPlaceholder: "Please specify..." },
+      ],
+    },
+  },
+  {
+    id: "partner",
+    num: "03",
+    title: "Referral Partner",
+    desc: "Tell us who's sending this referral over.",
+    fields: [
+      { key: "partner_firm",    label: "Referring Company",                    placeholder: "Acme Capital Partners",    span: 3, required: true },
+      { key: "partner_code",    label: "Your Relationship to Referring Company", placeholder: "Owner, broker, employee, etc.", span: 3 },
+      { key: "partner_contact", label: "Referrer Name",                        placeholder: "Jordan Rivers",            span: 3, required: true },
+      { key: "partner_title",   label: "Title",                                placeholder: "Senior Loan Broker",       span: 3 },
+      { key: "partner_email",   label: "Referrer Email",                       placeholder: "jordan@acmecap.com",       span: 3, required: true },
+      { key: "partner_phone",   label: "Direct phone",                         placeholder: "555-555-5555",             span: 3, type: "phone" },
+    ],
+  },
+  {
+    id: "funding",
+    num: "04",
+    title: "Funding Request",
+    desc: "What the prospect is looking for, and how fast.",
+    fields: [
+      { key: "product", label: "Product interest", type: "drilldown", span: 4, required: true, options: [
+        { value: "SCF", label: "SCF" },
+        { value: "Factoring", label: "Factoring", children: [
+          { value: "Traditional Factoring", label: "Traditional Factoring" },
+          { value: "Confidential Factoring", label: "Confidential Factoring" },
+          { value: "Bulk Factoring", label: "Bulk Factoring" },
+        ]},
+      ]},
+      { key: "amount",       label: "Amount requested",      placeholder: "500,000",              span: 2, mono: true, prefix: "$", required: true, type: "currency" },
+      { key: "use_of_funds", label: "Primary use of funds",  placeholder: "Payroll, growth capital, fuel", span: 4 },
+      { key: "timing",       label: "Target funding date",   placeholder: "Within 30 days",       span: 2 },
+    ],
+  },
+  {
+    id: "summary",
+    num: "05",
+    title: "Referral Summary",
+    desc: "Share any context that will help us hit the ground running.",
+    fields: [
+      { key: "referral_summary", label: "Summary", placeholder: "Please tell us any other relevant details regarding this referral — relationship context, urgency, pain points, prior conversations, or anything else that would help our team.", span: 6, type: "textarea" },
+    ],
+  },
+];
+
+// ============================================================
+// VALIDATORS
+// ============================================================
+const VALIDATORS = {
+  email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || "Enter a valid email address",
+  phone: (v) => /^[\d\s().+-]{7,}$/.test(v) || "Enter a valid phone number",
+};
+
+// ============================================================
+// APP
+// ============================================================
+function App() {
+  const [values, setValues]       = useState({});
+  const [touched, setTouched]     = useState({});
+  const [errors, setErrors]       = useState({});
+  const [stage, setStage]         = useState("form"); // form | review | submitting | success | error
+  const [refNumber, setRefNumber] = useState("");
+  const [submitError, setSubmitError] = useState("");
+
+  // Autosave to localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("rs-intake-state");
+      if (saved) {
+        const s = JSON.parse(saved);
+        if (s.values) setValues(s.values);
+      }
+    } catch (e) {}
+  }, []);
+  useEffect(() => {
+    try { localStorage.setItem("rs-intake-state", JSON.stringify({ values })); } catch (e) {}
+  }, [values]);
+
+  const setValue = (key, v) => {
+    setValues(prev => ({ ...prev, [key]: v }));
+    if (touched[key]) validateField(key, v);
+  };
+
+  const findField = (key) => {
+    for (const s of SECTIONS) {
+      const f = s.fields?.find(f => f.key === key);
+      if (f) return f;
+    }
+    return null;
+  };
+
+  const validateField = (key, v) => {
+    const field = findField(key);
+    if (!field) return true;
+    const val = v ?? values[key] ?? "";
+    if (field.required && !String(val).trim()) {
+      setErrors(e => ({ ...e, [key]: "This field is required" }));
+      return false;
+    }
+    if (field.validate && String(val).trim()) {
+      const result = VALIDATORS[field.validate](String(val));
+      if (result !== true) {
+        setErrors(e => ({ ...e, [key]: result }));
+        return false;
+      }
+    }
+    setErrors(e => { const n = { ...e }; delete n[key]; return n; });
+    return true;
+  };
+
+  const validateAll = () => {
+    let ok = true;
+    const newTouched = { ...touched };
+    SECTIONS.forEach(section => {
+      (section.fields || []).forEach(f => {
+        newTouched[f.key] = true;
+        if (!validateField(f.key, values[f.key])) ok = false;
+      });
+    });
+    setTouched(newTouched);
+    return ok;
+  };
+
+  const goToReview = () => {
+    if (!validateAll()) {
+      // Find the first section with a missing required field and scroll to it
+      for (const section of SECTIONS) {
+        const hasError = (section.fields || []).some(f => 
+          f.required && (!values[f.key] || !String(values[f.key]).trim())
+        );
+        if (hasError) {
+          const el = document.querySelector('[data-section-id="' + section.id + '"]');
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          return;
+        }
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    setStage("review");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const submit = async () => {
+    setStage("submitting");
+    setSubmitError("");
+
+    const payload = new URLSearchParams({
+      // Submitter
+      submitter_name:  values.submitter_name  || "",
+      submitter_title: values.submitter_title || "",
+      submitter_email: values.submitter_email || "",
+      // Prospect
+      legal_name:      values.legal_name      || "",
+      dba:             values.dba             || "",
+      client_name:     values.client_name     || "",
+      client_email:    values.client_email    || "",
+      client_phone:    values.client_phone    || "",
+      street:          values.street          || "",
+      unit:            values.unit            || "",
+      city:            values.city            || "",
+      state:           values.state           || "",
+      zip:             values.zip             || "",
+      // Current financing checkboxes
+      has_bank_line:   values.has_bank_line   ? "Yes" : "",
+      has_factor:      values.has_factor      ? "Yes" : "",
+      has_mca:         values.has_mca         ? "Yes" : "",
+      has_equipment:   values.has_equipment   ? "Yes" : "",
+      has_none:        values.has_none        ? "Yes" : "",
+      has_other_text:  values.has_other_text  || "",
+      // Partner
+      partner_firm:    values.partner_firm    || "",
+      partner_code:    values.partner_code    || "",
+      partner_contact: values.partner_contact || "",
+      partner_title:   values.partner_title   || "",
+      partner_email:   values.partner_email   || "",
+      partner_phone:   values.partner_phone   || "",
+      // Funding
+      product:         values.product         || "",
+      product_sub:     values.product_sub     || "",
+      amount:          values.amount          || "",
+      use_of_funds:    values.use_of_funds    || "",
+      timing:          values.timing          || "",
+      referral_summary: values.referral_summary || "",
+    });
+
+    try {
+      // Send as JSON to Power Automate
+      const jsonPayload = {};
+      for (const [key, value] of payload.entries()) {
+        jsonPayload[key] = value;
+      }
+
+      const response = await fetch(POWER_AUTOMATE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(jsonPayload),
+      });
+
+      if (response.ok) {
+        const ref = "RS-" + new Date().getFullYear() + "-" + String(Math.floor(Math.random() * 9000) + 1000);
+        setRefNumber(ref);
+        try { localStorage.removeItem("rs-intake-state"); } catch (e) {}
+        setStage("success");
+      } else {
+        setSubmitError("Submission failed. Please try again or email dl-superstar-referral@ecapital.com directly.");
+        setStage("review");
+      }
+    } catch (err) {
+      setSubmitError("Network error. Please try again or email dl-superstar-referral@ecapital.com directly.");
+      setStage("review");
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const resetForm = () => {
+    if (!confirm("Clear all form data and start over?")) return;
+    setValues({}); setTouched({}); setErrors({});
+    setStage("form"); setRefNumber(""); setSubmitError("");
+    try { localStorage.removeItem("rs-intake-state"); } catch (e) {}
+  };
+
+  const progress = useMemo(() => {
+    if (stage === "success") return 100;
+    if (stage === "review" || stage === "submitting") return 95;
+    let total = 0, filled = 0;
+    SECTIONS.forEach(s => {
+      (s.fields || []).forEach(f => {
+        if (!f.required) return; // only count required fields
+        total++;
+        if (values[f.key] && String(values[f.key]).trim()) filled++;
+      });
+    });
+    return total === 0 ? 0 : Math.round((filled / total) * 100);
+  }, [values, stage]);
+
+  const [activeTab, setActiveTab] = useState("submit");
+  const [animKey, setAnimKey] = useState(0);
+
+  const switchTab = (tab) => {
+    setActiveTab(tab);
+    setAnimKey(k => k + 1);
+  };
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
+  return (
+    <>
+      <TopBar onReset={resetForm} stage={stage} activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === "submit" && stage === "form" && (
+        <div className={"progress-wrap" + (mounted ? " anim-fade-up-1" : "")} style={{ opacity: mounted ? undefined : 0 }}>
+          <div className="progress">
+            <div className="progress-step-label">In progress</div>
+            <div className="progress-track"><div className="progress-fill" style={{ width: progress + "%" }} /></div>
+            <div className="progress-pct">{progress}%</div>
+          </div>
+        </div>
+      )}
+      <TabNav activeTab={activeTab} setActiveTab={switchTab} mounted={mounted} />
+      <div className="app tab-content" key={animKey}>
+        {activeTab === "submit" && (stage === "form") && (
+          <>
+            <Hero />
+            <div className="form-wrap">
+              {SECTIONS.map((section, idx) => (
+                <Section
+                  key={section.id}
+                  animClass={mounted ? "anim-fade-up-" + Math.min(idx + 3, 7) : ""}
+                  animated={mounted}
+                  section={section}
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  setValue={setValue}
+                  validateField={validateField}
+                  setTouched={setTouched}
+                />
+              ))}
+              <div className={"form-foot" + (mounted ? " anim-fade-up-7" : "")} style={{ opacity: mounted ? undefined : 0 }}>
+                <button className="btn btn-primary" onClick={goToReview}>
+                  Review submission <span className="kbd">↵</span>
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+
+        {activeTab === "submit" && (stage === "review" || stage === "submitting") && (
+          <Review
+            values={values}
+            submitError={submitError}
+            submitting={stage === "submitting"}
+            onEdit={() => { setStage("form"); setSubmitError(""); }}
+            onBack={() => { setStage("form"); setSubmitError(""); }}
+            onSubmit={submit}
+          />
+        )}
+
+        {activeTab === "submit" && stage === "success" && <Success refNumber={refNumber} onReset={resetForm} />}
+        {activeTab === "guide" && <ProgramGuide key={animKey} />}
+      </div>
+    </>
+  );
+}
+
+// ============================================================
+// TOP BAR
+// ============================================================
+function TopBar({ onReset, stage, activeTab, setActiveTab }) {
+  const [time, setTime] = useState(formatTime());
+  useEffect(() => {
+    const t = setInterval(() => setTime(formatTime()), 30000);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <header className="topbar">
+      <div className="topbar-inner">
+        <div className="brand">
+          <div className="brand-name">Referral Superstars</div>
+          <span className="brand-sep">×</span>
+          <img src="data:image/png;base64,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" alt="eCapital" className="brand-logo" />
+        </div>
+        <div className="topbar-meta">
+          <div><span className="dot"></span>SECURE · 256-BIT TLS</div>
+          <div style={{ color: "var(--ink-4)", borderLeft: "1px solid var(--line)", paddingLeft: "var(--s-6)" }}>🔒 Confidential · Internal Use Only</div>
+          <div>{time}</div>
+          <button className="btn btn-ghost" style={{ padding: "6px 10px", fontSize: 11 }} onClick={onReset}>Clear</button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function formatTime() {
+  const d = new Date();
+  return d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false }) + " ET";
+}
+
+// ============================================================
+// HERO
+// ============================================================
+function Hero() {
+  const today = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  const fullText = "prospect.";
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    let i = 0;
+    const timeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        if (i < fullText.length) {
+          setDisplayed(fullText.slice(0, i + 1));
+          i++;
+        } else {
+          setDone(true);
+          clearInterval(interval);
+        }
+      }, 80);
+      return () => clearInterval(interval);
+    }, 850);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  return (
+    <div className="hero">
+      <div>
+        <div className="hero-kicker">Referral Superstars · Intake Form</div>
+        <h1>Refer a <em style={{ color: "var(--ink-4)" }}>{displayed}{!done && <span className="cursor-blink"></span>}</em></h1>
+        <p className="hero-sub">
+          Complete this intake to submit a referral for a prospect seeking Factoring or Supply Chain Financing.
+          Someone from Commercial Finance will reach out if any additional information is needed.
+        </p>
+      </div>
+      <div className="hero-meta">
+        <div className="hero-meta-row"><span>Est. time</span><b>4 min</b></div>
+        <div className="hero-meta-row"><span>Sections</span><b>05</b></div>
+        <div className="hero-meta-row"><span>Autosave</span><b>On</b></div>
+        <div className="hero-meta-row"><span>Date</span><b>{today}</b></div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// SECTION
+// ============================================================
+function Section({ section, values, errors, touched, setValue, validateField, setTouched, animClass, animated }) {
+  return (
+    <section className={"section " + (animClass || "")} style={{ opacity: animated ? undefined : 0 }} data-section-id={section.id}>
+      <div className="section-header">
+        <div className="section-num">SECTION {section.num}</div>
+        <h2 className="section-title">{section.title}</h2>
+        <p className="section-desc">{section.desc}</p>
+      </div>
+      <div className="section-body">
+        {(section.fields || []).map(f => (
+          <Field
+            key={f.key}
+            field={f}
+            value={values[f.key] || ""}
+            values={values}
+            setValue={setValue}
+            error={touched[f.key] ? errors[f.key] : null}
+            onChange={(v) => setValue(f.key, v)}
+            onBlur={() => {
+              setTouched(t => ({ ...t, [f.key]: true }));
+              validateField(f.key, values[f.key]);
+            }}
+          />
+        ))}
+        {section.checks && (
+          <div className="span-6" style={{ marginTop: 8 }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
+              {section.checks.label}
+            </div>
+            <div className="check-group">
+              {section.checks.items.map(item => (
+                <Check
+                  key={item.key}
+                  item={item}
+                  on={!!values[item.key]}
+                  onChange={() => setValue(item.key, !values[item.key])}
+                  inputValue={item.inputKey ? values[item.inputKey] : ""}
+                  onInputChange={v => item.inputKey && setValue(item.inputKey, v)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// FIELD
+// ============================================================
+function Field({ field, value, error, onChange, onBlur, values, setValue }) {
+  const valid = !error && value && (field.required || field.validate);
+  const cls = ["field", "span-" + (field.span || 3), error ? "error" : "", valid ? "valid" : ""].join(" ");
+
+  if (field.type === "drilldown") {
+    const subKey = field.key + "_sub";
+    const subVal = values?.[subKey] || "";
+    const selected = field.options.find(o => o.value === value);
+    return (
+      <div className={cls}>
+        <label className="field-label">
+          <span>{field.label}{field.required && <span className="req"> *</span>}</span>
+        </label>
+        <div className="pill-group">
+          {field.options.map(opt => (
+            <button type="button" key={opt.value}
+              className={"pill" + (value === opt.value ? " on" : "")}
+              onClick={() => { onChange(opt.value); if (!opt.children && setValue) setValue(subKey, ""); }}>
+              {opt.label}
+            </button>
+          ))}
+        </div>
+        {selected?.children && (
+          <div className="pill-sub" style={{ marginTop: 10 }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>{selected.label} type</div>
+            <div className="pill-group">
+              {selected.children.map(c => (
+                <button type="button" key={c.value}
+                  className={"pill" + (subVal === c.value ? " on" : "")}
+                  onClick={() => setValue && setValue(subKey, c.value)}>
+                  {c.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {error && <div className="field-msg error"><ErrIcon />{error}</div>}
+      </div>
+    );
+  }
+
+  const handleChange = (e) => {
+    if (field.type === "currency") {
+      const raw = e.target.value.replace(/[^0-9]/g, "");
+      const formatted = raw ? parseInt(raw, 10).toLocaleString("en-US") : "";
+      onChange(formatted);
+    } else if (field.type === "phone") {
+      const raw = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+      let formatted = raw;
+      if (raw.length >= 7) formatted = raw.slice(0,3) + "-" + raw.slice(3,6) + "-" + raw.slice(6);
+      else if (raw.length >= 4) formatted = raw.slice(0,3) + "-" + raw.slice(3);
+      onChange(formatted);
+    } else {
+      onChange(e.target.value);
+    }
+  };
+
+  if (field.type === "textarea") {
+    return (
+      <div className={"field span-" + (field.span || 6)}>
+        <label className="field-label">
+          <span>{field.label}{field.required && <span className="req"> *</span>}</span>
+        </label>
+        <textarea
+          className="input"
+          rows={5}
+          value={value}
+          placeholder={field.placeholder}
+          onChange={e => onChange(e.target.value)}
+          onBlur={onBlur}
+          style={{ resize: "vertical", lineHeight: "1.5", fontFamily: "inherit" }}
+        />
+      </div>
+    );
+  }
+
+  const inputEl = (
+    <input className={"input" + (field.mono ? " mono" : "")} type="text"
+      value={value} placeholder={field.placeholder}
+      onChange={handleChange} onBlur={onBlur} />
+  );
+
+  return (
+    <div className={cls}>
+      <label className="field-label">
+        <span>{field.label}{field.required && <span className="req"> *</span>}</span>
+      </label>
+      {field.prefix ? (
+        <div className="input-prefix"><span className="prefix">{field.prefix}</span>{inputEl}</div>
+      ) : inputEl}
+      {error && <div className="field-msg error"><ErrIcon />{error}</div>}
+    </div>
+  );
+}
+
+function ErrIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+      <circle cx="5" cy="5" r="4" stroke="currentColor" strokeWidth="1"/>
+      <path d="M5 3v2.5M5 7v.01" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+// ============================================================
+// CHECK
+// ============================================================
+function Check({ item, on, onChange, inputValue, onInputChange }) {
+  return (
+    <div className={"check" + (on ? " on" : "")} onClick={onChange} role="checkbox" aria-checked={on} tabIndex={0}
+      onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); onChange(); }}}>
+      <div className="check-box">
+        <svg viewBox="0 0 10 10" fill="none">
+          <path d="M2 5L4 7L8 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+      <div style={{ flex: 1 }}>
+        <div className="check-label">{item.label}</div>
+        {item.withInput && on && (
+          <input className="input" type="text" value={inputValue || ""}
+            placeholder={item.inputPlaceholder || "Please specify..."}
+            onChange={e => onInputChange(e.target.value)}
+            onClick={e => e.stopPropagation()}
+            onKeyDown={e => e.stopPropagation()}
+            style={{ marginTop: 8 }} autoFocus />
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// REVIEW
+// ============================================================
+function Review({ values, submitError, submitting, onEdit, onBack, onSubmit }) {
+  const CHECK_LABELS = {
+    has_bank_line: "Existing bank line of credit",
+    has_factor: "Currently factoring",
+    has_mca: "Active MCA",
+    has_equipment: "Equipment financing",
+    has_none: "None",
+  };
+  const activeChecks = Object.entries(CHECK_LABELS).filter(([k]) => values[k]);
+  if (values.has_other && values.has_other_text) activeChecks.push(["has_other", "Other: " + values.has_other_text]);
+
+  return (
+    <div className="review anim-fade-up-1">
+      <div className="review-header">
+        <div>
+          <div className="hero-kicker">Final Step</div>
+          <h2>Review &amp; <em>submit.</em></h2>
+          <p style={{ color: "var(--ink-3)", marginTop: 8, maxWidth: "60ch" }}>
+            Confirm the details below. You'll receive a copy via email after submission.
+          </p>
+        </div>
+        <button className="btn btn-ghost" onClick={onBack}>← Back to form</button>
+      </div>
+
+      {submitError && <div className="error-banner">⚠ {submitError}</div>}
+
+      {/* Submitter */}
+      <div className="review-section">
+        <div><div className="review-section-title">SECTION 01 · Submitted By <span className="edit" onClick={onEdit}> Edit</span></div></div>
+        <div className="review-grid">
+          <ReviewRow label="Name" value={values.submitter_name} />
+          <ReviewRow label="Title / Dept" value={values.submitter_title} />
+          <ReviewRow label="Email" value={values.submitter_email} />
+        </div>
+      </div>
+
+      {/* Prospect */}
+      <div className="review-section">
+        <div><div className="review-section-title">SECTION 02 · Prospect Profile <span className="edit" onClick={onEdit}> Edit</span></div></div>
+        <div>
+          <div className="review-grid">
+            <ReviewRow label="Legal Name" value={values.legal_name} />
+            <ReviewRow label="DBA" value={values.dba} />
+            <ReviewRow label="Contact" value={values.client_name} />
+            <ReviewRow label="Email" value={values.client_email} />
+            <ReviewRow label="Phone" value={values.client_phone} />
+            <ReviewRow label="Address" value={[values.street, values.unit, values.city, values.state, values.zip].filter(Boolean).join(", ")} />
+          </div>
+          {activeChecks.length > 0 && (
+            <div className="review-chips" style={{ marginTop: 16 }}>
+              {activeChecks.map(([k, label]) => <span className="chip" key={k}>✓ {label}</span>)}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Partner */}
+      <div className="review-section">
+        <div><div className="review-section-title">SECTION 03 · Referral Partner <span className="edit" onClick={onEdit}> Edit</span></div></div>
+        <div className="review-grid">
+          <ReviewRow label="Company" value={values.partner_firm} />
+          <ReviewRow label="Relationship" value={values.partner_code} />
+          <ReviewRow label="Contact" value={values.partner_contact} />
+          <ReviewRow label="Title" value={values.partner_title} />
+          <ReviewRow label="Email" value={values.partner_email} />
+          <ReviewRow label="Phone" value={values.partner_phone} />
+        </div>
+      </div>
+
+      {/* Funding */}
+      <div className="review-section">
+        <div><div className="review-section-title">SECTION 04 · Funding Request <span className="edit" onClick={onEdit}> Edit</span></div></div>
+        <div className="review-grid">
+          <ReviewRow label="Product" value={values.product_sub ? values.product + " · " + values.product_sub : values.product} />
+          <ReviewRow label="Amount" value={values.amount ? "$" + values.amount : ""} mono />
+          <ReviewRow label="Use of Funds" value={values.use_of_funds} />
+          <ReviewRow label="Target Date" value={values.timing} />
+        </div>
+      </div>
+
+      <div className="review-section">
+        <div><div className="review-section-title">SECTION 05 · Referral Summary <span className="edit" onClick={onEdit}> Edit</span></div></div>
+        <div style={{ fontSize: 13, color: "var(--ink-2)", lineHeight: 1.6, whiteSpace: "pre-wrap" }}>
+          {values.referral_summary || <span style={{ color: "var(--ink-4)", fontStyle: "italic" }}>—</span>}
+        </div>
+      </div>
+
+      <div className="review-foot">
+        <div style={{ fontSize: 12, color: "var(--ink-3)", lineHeight: 1.5 }}>
+          By submitting, you authorize Referral Superstars to contact the prospect above and initiate the review process.
+          Payout tier will be confirmed in Salesforce after funding.
+        </div>
+        <div className="review-actions">
+          <button className="btn btn-ghost" onClick={onBack}>← Edit form</button>
+          <button className="btn btn-primary" onClick={onSubmit} disabled={submitting}>
+            {submitting ? "Submitting…" : <>Submit referral <span className="kbd">↵</span></>}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReviewRow({ label, value, mono }) {
+  return (
+    <div className="review-row">
+      <span className="k">{label}</span>
+      <span className={"v" + (!value ? " empty" : mono ? " mono" : "")}>{value || "—"}</span>
+    </div>
+  );
+}
+
+// ============================================================
+// SUCCESS
+// ============================================================
+function Success({ refNumber, onReset }) {
+  return (
+    <div className="success anim-fade-up-1">
+      <div className="success-mark">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12.5L10 17.5L19 7.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+      <div className="hero-kicker">Submitted</div>
+      <h2>Your referral has <em style={{ color: "#2D7D5A" }}>been processed.</em></h2>
+      <p>We've received the submission and sent a confirmation to your email. Our team will review and respond within one business day.</p>
+      <div className="success-ref">
+        <span className="k">Reference</span>
+        <span className="v">{refNumber}</span>
+      </div>
+      <div style={{ marginTop: 40 }}>
+        <button className="btn btn-ghost" onClick={onReset}>Submit another referral</button>
+      </div>
+    </div>
+  );
+}
+
+
+// ============================================================
+// TAB NAV
+// ============================================================
+function TabNav({ activeTab, setActiveTab, mounted }) {
+  return (
+    <div className={"tab-nav" + (mounted ? " anim-fade-in" : "")} style={{ opacity: mounted ? undefined : 0 }}>
+      <div className="tab-nav-inner">
+        <button className={"tab-btn" + (activeTab === "submit" ? " active" : "")} onClick={() => setActiveTab("submit")}>
+          Submit a Referral
+        </button>
+        <button className={"tab-btn" + (activeTab === "guide" ? " active" : "")} onClick={() => setActiveTab("guide")}>
+          Program Guide
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// PROGRAM GUIDE
+// ============================================================
+function ProgramGuide() {
+  const [openFaq, setOpenFaq] = useState(null);
+  const fullText = "guide.";
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    let i = 0;
+    const t = setTimeout(() => {
+      const interval = setInterval(() => {
+        if (i < fullText.length) {
+          setDisplayed(fullText.slice(0, i + 1));
+          i++;
+        } else {
+          setDone(true);
+          clearInterval(interval);
+        }
+      }, 120);
+    }, 850);
+    return () => clearTimeout(t);
+  }, []);
+
+  const faqs = [
+    {
+      q: "What documents should I gather from the prospect?",
+      a: "Please obtain the most recent A/R Aging, A/P Aging & Financial Statements. The BDO will collect any remaining items."
+    },
+    {
+      q: "When will I receive my payout?",
+      a: "Payouts are issued 1 month after the deal funds for both AR and SCF."
+    },
+    {
+      q: "How do I know if my referral qualifies?",
+      a: "The BDO team will review and confirm eligibility after submission."
+    },
+    {
+      q: "Can I refer more than one company?",
+      a: "Yes, there is no limit on the number of referrals you can submit."
+    },
+    {
+      q: "What if my referral doesn't fund?",
+      a: "Payouts are only issued on funded deals. No payout is issued if the deal does not close."
+    },
+    {
+      q: "Do I need to do anything after submitting?",
+      a: <>Follow the Next Steps in your confirmation email. If you have supporting documents (A/R Aging, financials, etc.), email them to <a href="mailto:dl-superstar-referral@ecapital.com" style={{color:"var(--accent)"}}>dl-superstar-referral@ecapital.com</a> with the prospect company name in the subject line.</>
+    },
+  ];
+
+  const GuideSection = ({ num, title, children, animClass }) => (
+    <div className={animClass || ""} style={{ padding: "var(--s-10) 0", borderBottom: "1px solid var(--line)", display: "grid", gridTemplateColumns: "240px 1fr", gap: "var(--s-10)" }}>
+      <div style={{ position: "sticky", top: 96, alignSelf: "start" }}>
+        <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-4)", letterSpacing: "0.08em", marginBottom: "var(--s-2)" }}>SECTION {num}</div>
+        <h2 style={{ fontSize: 22, fontWeight: 500, letterSpacing: "-0.02em", margin: "0 0 var(--s-3)", color: "var(--ink)", lineHeight: 1.15 }}>{title}</h2>
+      </div>
+      <div>{children}</div>
+    </div>
+  );
+
+  const ICPCard = ({ title, rows }) => (
+    <div style={{ border: "1px solid var(--line)", borderRadius: "var(--r-md)", overflow: "hidden", background: "var(--bg-elev)", display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "var(--s-3) var(--s-5)", borderBottom: "1px solid var(--line)", background: "var(--bg-sunken)" }}>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--ink-2)", fontWeight: 500 }}>{title}</span>
+      </div>
+      {rows.map((row, i) => (
+        <div key={i} style={{ padding: "var(--s-4) var(--s-5)", borderTop: i === 0 ? "none" : "1px solid var(--line)", fontSize: 13, color: "var(--ink-2)", lineHeight: 1.5, flex: 1, minHeight: row.minHeight }}>
+          <span style={{ fontWeight: 600, color: "var(--ink)" }}>{row.label}:</span> {row.value}
+        </div>
+      ))}
+    </div>
+  );
+
+  const PayoutTable = ({ title, headers, rows }) => (
+    <div style={{ border: "1px solid var(--line-2)", borderRadius: "var(--r-md)", overflow: "hidden" }}>
+      <div style={{ padding: "var(--s-3) var(--s-4)", background: "var(--ink-2)", borderBottom: "1px solid var(--line-2)" }}>
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.08em", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}>{title}</span>
+      </div>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <thead>
+          <tr style={{ background: "var(--bg-sunken)" }}>
+            {headers.map((h, i) => (
+              <td key={i} style={{ padding: "var(--s-3) var(--s-4)", fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.06em", borderBottom: "2px solid var(--line-2)", fontWeight: 500 }}>{h}</td>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={i} style={{ background: i % 2 === 0 ? "var(--bg-elev)" : "var(--bg-sunken)" }}>
+              <td style={{ padding: "var(--s-3) var(--s-4)", fontSize: 13, color: "var(--ink-2)", borderBottom: i < rows.length - 1 ? "1px solid var(--line)" : "none" }}>{row[0]}</td>
+              <td style={{ padding: "var(--s-3) var(--s-4)", fontSize: 13, fontWeight: 600, color: "#2D7D5A", borderBottom: i < rows.length - 1 ? "1px solid var(--line)" : "none", fontFamily: "var(--font-mono)" }}>{row[1]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+
+  return (
+    <div style={{ paddingBottom: "var(--s-16)" }}>
+
+      <div style={{ padding: "var(--s-16) 0 var(--s-10)", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "end", gap: "var(--s-8)", borderBottom: "1px solid var(--line)", marginBottom: "var(--s-2)" }}>
+        <div>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "var(--s-4)" }}>Referral Superstars · Program Guide</div>
+          <h1 style={{ fontSize: 52, fontWeight: 500, letterSpacing: "-0.025em", lineHeight: 1.02, margin: "0 0 var(--s-4)" }}>
+            Program <em style={{ color: "var(--ink-4)", fontFamily: "var(--font-serif)", fontStyle: "italic", fontWeight: 400 }}>{displayed}{!done && <span className="cursor-blink"></span>}</em>
+          </h1>
+          <p style={{ color: "var(--ink-3)", maxWidth: "52ch", fontSize: 15, lineHeight: 1.5 }}>
+            Review this page to better understand our Ideal Client Profile, payout tiers, and get answers to frequently asked questions.
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--s-2)", alignItems: "flex-end", fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-3)", textTransform: "uppercase", letterSpacing: "0.08em", minWidth: 200 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "var(--s-4)", padding: "var(--s-2) 0", borderBottom: "1px dashed var(--line)" }}><span>Sections</span><b style={{ color: "var(--ink)", fontWeight: 500 }}>03</b></div>
+          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "var(--s-4)", padding: "var(--s-2) 0", borderBottom: "1px dashed var(--line)" }}><span>ICP</span><b style={{ color: "var(--ink)", fontWeight: 500 }}>AR + SCF</b></div>
+          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "var(--s-4)", padding: "var(--s-2) 0" }}><span>Updated</span><b style={{ color: "var(--ink)", fontWeight: 500 }}>2025</b></div>
+        </div>
+      </div>
+
+      <GuideSection num="01" title="Ideal Client Profile" animClass="anim-fade-up-1">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s-5)" }}>
+          <ICPCard title="AR Client ICP" rows={[
+            { label: "Revenue",        value: "$10MM+ in annual revenue",                                                          minHeight: 48 },
+            { label: "Industry",       value: "Staffing, Manufacturing, Wholesale Distribution, Retail, Oil & Gas",               minHeight: 72 },
+            { label: "Financials",     value: "Existing Credit Strike Zone",                                                       minHeight: 48 },
+            { label: "Use Case",       value: "Working capital to support operations, growth, payroll, etc.",                      minHeight: 72 },
+            { label: "Securitization", value: "Secured",                                                                           minHeight: 48 },
+          ]} />
+          <ICPCard title="SCF Client (Buyer) ICP" rows={[
+            { label: "Revenue",        value: "$250MM+ in annual revenue",                                                         minHeight: 48 },
+            { label: "Industry",       value: "Manufacturing, Wholesale Distribution, CPG",                                        minHeight: 72 },
+            { label: "Financials",     value: "Cash flow positive, no more than 7x leveraged",                                     minHeight: 48 },
+            { label: "Use Case",       value: "Working capital, terms extension with suppliers, synthetic terms extension",        minHeight: 72 },
+            { label: "Securitization", value: "Secured or Unsecured",                                                              minHeight: 48 },
+          ]} />
+        </div>
+      </GuideSection>
+
+      <GuideSection num="02" title="Payout Tiers" animClass="anim-fade-up-2">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--s-5)", marginBottom: "var(--s-4)" }}>
+          <PayoutTable
+            title="AR Financing — Funded Deal"
+            headers={["First Funding Amount", "Payout"]}
+            rows={[
+              ["< $250k", "$500"],
+              ["$250k – $500k", "$1,000"],
+              ["$500k – $2.5MM", "$2,500"],
+              ["$2.5MM+", "$5,000"],
+            ]}
+          />
+          <PayoutTable
+            title="Supply Chain Finance — Funded Deal"
+            headers={["Buyer Tier", "Payout"]}
+            rows={[
+              ["Mid-Market (< $25MM)", "$2,500"],
+              ["Enterprise (> $25MM)", "$5,000"],
+            ]}
+          />
+        </div>
+        <div style={{ padding: "var(--s-3) var(--s-4)", background: "var(--bg-sunken)", border: "1px solid var(--line)", borderRadius: "var(--r-sm)", fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-3)", letterSpacing: "0.01em" }}>
+          ⚠ Do not share tiered payout amounts publicly — reference the $500 to $5,000 range only when asked.
+        </div>
+      </GuideSection>
+
+      <GuideSection num="03" title="FAQ" animClass="anim-fade-up-3">
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--s-1)" }}>
+          {faqs.map((item, i) => (
+            <div key={i} style={{ border: "1px solid var(--line)", borderRadius: "var(--r-sm)", overflow: "hidden" }}>
+              <button
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                style={{
+                  width: "100%", textAlign: "left", background: openFaq === i ? "var(--accent-soft)" : "var(--bg-elev)",
+                  border: "none", padding: "var(--s-4) var(--s-5)",
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: 13,
+                  fontWeight: 600, color: openFaq === i ? "var(--accent)" : "var(--ink)",
+                  letterSpacing: "-0.005em", transition: "all 200ms"
+                }}
+              >
+                {item.q}
+                <span style={{
+                  fontFamily: "var(--font-mono)", fontSize: 10, color: openFaq === i ? "var(--accent)" : "var(--ink-4)",
+                  marginLeft: "var(--s-4)", flexShrink: 0,
+                  transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 200ms", display: "inline-block"
+                }}>▼</span>
+              </button>
+              {openFaq === i && (
+                <div style={{ padding: "var(--s-4) var(--s-5)", fontSize: 13, color: "var(--ink-3)", lineHeight: 1.6, background: "var(--bg-elev)", borderTop: "1px solid var(--line)", animation: "slideIn 200ms ease" }}>
+                  {item.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: "var(--s-6)", padding: "var(--s-4) var(--s-5)", border: "1px solid var(--line)", borderRadius: "var(--r-sm)", background: "var(--bg-elev)", fontSize: 13, color: "var(--ink-3)", fontStyle: "italic" }}>
+          Questions? Email <a href="mailto:dl-superstar-referral@ecapital.com" style={{ color: "var(--accent)", fontStyle: "normal", fontWeight: 500 }}>dl-superstar-referral@ecapital.com</a>
+        </div>
+      </GuideSection>
+
+    </div>
+  );
+}
+
+// ============================================================
+// MOUNT
+// ============================================================
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+</script>
+
+</body>
+</html>
